@@ -11,16 +11,15 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { 
           error: "Configuration serveur manquante",
-          details: "La clé API Gemini n'est pas configurée sur Vercel"
+          details: "La clé API Gemini n'est pas configurée sur Vercel. Va dans Settings → Environment Variables"
         },
         { status: 500 }
       );
     }
 
-    // Prompt optimisé pour un JSON fiable
-    const geminiPrompt = `TON RÔLE : Expert en création musicale pour un jukebox IA.
-TA TÂCHE : Génère des métadonnées de chanson UNIQUEMENT au format JSON suivant :
-
+    // Prompt optimisé
+    const geminiPrompt = `Tu es un DJ et producteur de musique électronique.
+Génère UNIQUEMENT un objet JSON avec ces champs :
 {
   "title": "titre créatif (3-5 mots)",
   "artist": "nom d'artiste plausible",
@@ -31,58 +30,56 @@ TA TÂCHE : Génère des métadonnées de chanson UNIQUEMENT au format JSON suiv
   "colorScheme": "couleur1-couleur2"
 }
 
-EXEMPLE :
+Exemple :
 {
   "title": "Neon Dreams",
-  "artist": "Synthwave Collective",
+  "artist": "Synthwave Collective", 
   "genre": "Synthwave",
   "bpm": 128,
   "mood": "nostalgic energetic",
-  "coverDescription": "A retro-futuristic cityscape with neon palm trees under a purple sky, viewed through a VHS filter",
+  "coverDescription": "A retro-futuristic cityscape with neon palm trees under a purple sky",
   "colorScheme": "purple-pink"
 }
 
-CRÉE UNE NOUVELLE CHANSON POUR : "${prompt}"
-RÉPONDS UNIQUEMENT EN JSON, SANS AUTRE TEXTE.`;
+Crée une nouvelle chanson pour : "${prompt}"
+RÉPONDS UNIQUEMENT LE JSON, SANS AUTRE TEXTE.`;
 
-    console.log("Appel de l'API Gemini avec le prompt:", prompt.substring(0, 50) + "...");
+    console.log("Appel de Gemini avec :", prompt);
 
-    // Appel à l'API Gemini
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{
-            parts: [{ text: geminiPrompt }]
-          }],
-          generationConfig: {
-            temperature: 0.8,  // Créativité modérée
-            maxOutputTokens: 500,
-          }
-        }),
-      }
-    );
+    // ⚠️ CHANGE ICI : Utilise gemini-1.5-pro ou gemini-pro
+    const modelName = "gemini-1.5-pro"; // ou "gemini-pro"
+    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{ text: geminiPrompt }]
+        }],
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 300,
+          responseMimeType: "application/json" // Force le format JSON
+        }
+      }),
+    });
 
     // Vérifie la réponse HTTP
     if (!response.ok) {
       const errorText = await response.text();
       console.error("Erreur Gemini API:", response.status, errorText);
       
-      // Essaye de récupérer les détails de l'erreur
-      let errorDetails = `API Gemini erreur ${response.status}`;
-      try {
-        const errorJson = JSON.parse(errorText);
-        errorDetails = errorJson.error?.message || errorText;
-      } catch {
-        errorDetails = errorText;
+      // Essaie gemini-pro si gemini-1.5-pro échoue
+      if (modelName === "gemini-1.5-pro" && response.status === 404) {
+        console.log("Essaie avec gemini-pro...");
+        // Tu pourrais implémenter une retry automatique ici
       }
       
       return NextResponse.json(
         { 
-          error: "Échec de l'appel à l'IA",
-          details: errorDetails,
+          error: "API Gemini indisponible",
+          details: `Modèle ${modelName} non trouvé. Essaie 'gemini-pro'`,
           status: response.status
         },
         { status: 500 }
@@ -96,33 +93,31 @@ RÉPONDS UNIQUEMENT EN JSON, SANS AUTRE TEXTE.`;
     const textResponse = data.candidates?.[0]?.content?.parts?.[0]?.text;
     
     if (!textResponse) {
+      console.error("Réponse vide:", data);
       throw new Error("Réponse vide de Gemini");
     }
 
-    // Nettoie et parse le JSON
-    const cleanText = textResponse.trim();
-    
-    // Essaie d'extraire le JSON (au cas où Gemini ajoute du texte autour)
-    let jsonMatch;
+    // Parse le JSON
+    let songData;
     try {
-      jsonMatch = cleanText.match(/\{[\s\S]*\}/);
-    } catch (e) {
-      throw new Error("Format de réponse invalide");
+      songData = JSON.parse(textResponse.trim());
+    } catch (parseError) {
+      console.error("Erreur parsing JSON:", textResponse);
+      // Essaie d'extraire le JSON si entouré de texte
+      const jsonMatch = textResponse.match(/\{[\s\S]*\}/);
+      if (jsonMatch) {
+        songData = JSON.parse(jsonMatch[0]);
+      } else {
+        throw new Error("Réponse non-JSON: " + textResponse.substring(0, 100));
+      }
     }
 
-    if (!jsonMatch) {
-      console.error("Réponse non-JSON de Gemini:", cleanText);
-      throw new Error("L'IA n'a pas retourné de JSON valide");
-    }
-
-    const songData = JSON.parse(jsonMatch[0]);
-    
-    // Validation des données requises
+    // Validation des données
     if (!songData.title || !songData.artist || !songData.genre) {
-      throw new Error("Données de chanson incomplètes");
+      throw new Error("Données incomplètes de l'IA");
     }
 
-    // Données par défaut si manquantes
+    // Données finales
     const finalSong = {
       title: songData.title,
       artist: songData.artist,
@@ -132,7 +127,8 @@ RÉPONDS UNIQUEMENT EN JSON, SANS AUTRE TEXTE.`;
       coverDescription: songData.coverDescription || "Un design abstrait coloré",
       colorScheme: songData.colorScheme || "purple-blue",
       generatedAt: new Date().toISOString(),
-      isReal: true  // Indique que c'est une vraie génération
+      isReal: true,
+      modelUsed: modelName
     };
 
     return NextResponse.json(finalSong);
@@ -140,35 +136,25 @@ RÉPONDS UNIQUEMENT EN JSON, SANS AUTRE TEXTE.`;
   } catch (error: any) {
     console.error("Erreur complète:", error);
     
-    // Fallback en cas d'échec total
+    // Fallback avec une vraie API différente (optionnel)
     const fallbackSongs = [
       {
-        title: "Digital Dreams",
-        artist: "Neural Echo",
-        genre: "Chillwave",
-        bpm: 110,
-        mood: "calme contemplatif",
-        coverDescription: "Un cerveau numérique avec des ondes sonores colorées dans une nébuleuse",
-        colorScheme: "purple-blue",
-        isReal: false,
-        error: error.message
-      },
-      {
-        title: "Circuit Breaker",
+        title: "Digital Resonance",
         artist: "AI Symphony",
-        genre: "Glitch Hop",
-        bpm: 95,
-        mood: "energetic glitchy",
-        coverDescription: "Un circuit électronique animé avec des étincelles de données",
-        colorScheme: "green-black",
+        genre: "Electronic",
+        bpm: 125,
+        mood: "futuristic calm",
+        coverDescription: "Holographic sound waves in a digital void, glowing with cyan and magenta light",
+        colorScheme: "cyan-magenta",
         isReal: false,
-        error: error.message
+        error: error.message,
+        tip: "Utilise 'gemini-pro' au lieu de 'gemini-1.5-pro'"
       }
     ];
     
     return NextResponse.json(
-      fallbackSongs[Math.floor(Math.random() * fallbackSongs.length)],
-      { status: 500 }
+      fallbackSongs[0],
+      { status: 200 } // Toujours retourner 200 pour le frontend
     );
   }
 }
