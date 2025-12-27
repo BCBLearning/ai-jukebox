@@ -11,7 +11,7 @@ export async function POST(request: Request) {
       return NextResponse.json(getFallbackSong(prompt, "Clé API manquante"));
     }
 
-    // 2. Appel Gemini avec timeout manuel
+    // 2. Appel Gemini avec timeout
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 8000);
 
@@ -54,13 +54,17 @@ export async function POST(request: Request) {
           isReal: true,
           response: text
         });
+      } else {
+        const error = await response.text();
+        console.log("Gemini API error:", error);
+        throw new Error(`API error ${response.status}`);
       }
-    } catch (fetchError) {
-      console.log("Fetch error:", fetchError);
+    } catch (fetchError: any) {
+      console.log("Fetch error:", fetchError.message);
       // Continue au fallback
+    } finally {
+      clearTimeout(timeout);
     }
-
-    clearTimeout(timeout);
     
   } catch (error) {
     console.log("Global error:", error);
@@ -70,6 +74,7 @@ export async function POST(request: Request) {
   return NextResponse.json(getFallbackSong("", "API temporairement indisponible"));
 }
 
+// Fonction helper doit être définie DANS le fichier mais HORS de la fonction POST
 function getFallbackSong(prompt: string, error: string) {
   const songs = [
     {
@@ -94,5 +99,10 @@ function getFallbackSong(prompt: string, error: string) {
     }
   ];
   
-  return songs[Math.floor(Math.random() * songs.length)];
+  const song = songs[Math.floor(Math.random() * songs.length)];
+  return {
+    ...song,
+    promptUsed: prompt,
+    error: error
+  };
 }
