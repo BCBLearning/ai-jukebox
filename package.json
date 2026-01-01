@@ -1,6 +1,6 @@
 {
   "name": "ai-jukebox-hackathon",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "NEXT_DISABLE_SWC=1 next dev",
@@ -9,10 +9,18 @@
     "lint": "next lint",
     "deploy": "vercel --prod",
     "deploy-preview": "vercel",
-    "test:demo": "curl -X POST http://localhost:3000/api/generate -H 'Content-Type: application/json' -d '{\"prompt\":\"synthwave for coding\"}'",
-    "test:config": "curl http://localhost:3000/api/config",
-    "setup:demo": "cp .env.local.demo .env.local",
-    "hackathon:present": "echo '🚀 AI Jukebox ready for hackathon presentation! Demo mode activated with 5 high-quality songs.'"
+    "check-env": "node scripts/check-env.js",
+    "check-vercel": "node scripts/check-vercel.js",
+    "test-all": "npm run check-env && npm run dev",
+    "hackathon:setup": "node scripts/setup-hackathon.js",
+    "hackathon:deploy": "npm run build && vercel --prod",
+    "hackathon:verify": "npm run check-vercel",
+    
+    "test:gemini": "curl -X POST http://localhost:3000/api/generate -H 'Content-Type: application/json' -d '{\"prompt\":\"synthwave for hackathon demo\"}'",
+    
+    
+    "test:circle": "curl -X POST http://localhost:3000/api/paiement -H 'Content-Type: application/json' -d '{\"songTitle\":\"Test\",\"artist\":\"AI\",\"amount\":\"0.001\"}'",
+    "test:config": "curl http://localhost:3000/api/config"
   },
   "dependencies": {
     "@circle-fin/developer-controlled-wallets": "^9.6.0",
@@ -42,18 +50,22 @@
     "ai",
     "blockchain",
     "nextjs",
-    "demo"
+    "vercel"
   ],
   "author": "Hackathon Team",
   "license": "MIT",
   "hackathon": {
     "name": "Agentic Commerce on Arc",
+    "organization": "LabLab.ai",
+    "partners": ["Circle", "Arc", "Google DeepMind"],
+    "deadline": "March 9, 2024",
     "tracks": [
       "Best Autonomous Commerce Application",
       "Best Trustless AI Agent",
-      "Best Gateway-Based Micropayments Integration"
+      "Best Gateway-Based Micropayments Integration",
+      "Best Product Design"
     ],
-    "technologies": ["Arc", "USDC", "Circle", "Gemini AI"],
-    "demoReady": true
+    "demoReady": true,
+    "realMode": true
   }
 }
