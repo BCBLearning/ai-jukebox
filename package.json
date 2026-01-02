@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "NEXT_DISABLE_SWC=1 next dev",
-    "build": "NEXT_DISABLE_SWC=1 next build",
+    "build": "NEXT_DISABLE_SWC=1 npm run generate-favicons && next build",
     "start": "NEXT_DISABLE_SWC=1 next start",
     "lint": "next lint",
     "deploy": "vercel --prod",
@@ -17,10 +17,18 @@
     "hackathon:verify": "npm run check-vercel",
     
     "test:gemini": "curl -X POST http://localhost:3000/api/generate -H 'Content-Type: application/json' -d '{\"prompt\":\"synthwave for hackathon demo\"}'",
-    
-    
     "test:circle": "curl -X POST http://localhost:3000/api/paiement -H 'Content-Type: application/json' -d '{\"songTitle\":\"Test\",\"artist\":\"AI\",\"amount\":\"0.001\"}'",
-    "test:config": "curl http://localhost:3000/api/config"
+    "test:config": "curl http://localhost:3000/api/config",
+    
+    "generate-favicons": "node scripts/generate-favicons.js",
+    "generate-favicons:simple": "node scripts/generate-favicons-simple.js",
+    "generate-favicons:dev": "npm run generate-favicons-simple",
+    "predev": "npm run generate-favicons:dev",
+    "postinstall": "npm run generate-favicons:dev",
+    
+    "clean": "rm -rf .next node_modules package-lock.json",
+    "fresh-install": "npm run clean && npm install",
+    "reset": "npm run clean && npm install && npm run generate-favicons:dev"
   },
   "dependencies": {
     "@circle-fin/developer-controlled-wallets": "^9.6.0",
@@ -38,7 +46,8 @@
     "eslint-config-next": "13.5.6",
     "postcss": "8.4.32",
     "tailwindcss": "3.4.0",
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "canvas": "^2.11.2"
   },
   "description": "AI Jukebox - Hackathon Submission for Agentic Commerce on Arc",
   "keywords": [
@@ -67,5 +76,21 @@
     ],
     "demoReady": true,
     "realMode": true
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

@@ -1,0 +1,25 @@
+{
+  "name": "AI Jukebox – Agentic Commerce",
+  "short_name": "AI Jukebox",
+  "description": "Next-gen agentic commerce platform with Gemini AI, USDC payments and Arc blockchain",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1e1b4b",
+  "theme_color": "#8b5cf6",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": [
+    "business",
+    "finance",
+    "music",
+    "technology"
+  ]
+}

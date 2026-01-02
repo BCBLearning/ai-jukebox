@@ -1,0 +1,23 @@
+<!-- public/favicon.svg - Vous pouvez convertir ce SVG en .ico -->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8B5CF6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Cercle extérieur (vinyle) -->
+  <circle cx="32" cy="32" r="30" fill="url(#gradient)" stroke="#1F2937" stroke-width="1"/>
+  
+  <!-- Circuits électroniques -->
+  <path d="M20,20 L44,20 M20,26 L44,26 M20,32 L44,32 M20,38 L44,38 M20,44 L44,44" 
+        stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Note de musique centrale -->
+  <path d="M32,16 C36,16 40,20 40,24 C40,28 36,32 32,32 C28,32 24,28 24,24 C24,20 28,16 32,16 Z M32,32 L32,48" 
+        stroke="#FFFFFF" fill="none" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Point central -->
+  <circle cx="32" cy="24" r="2" fill="#FFFFFF"/>
+</svg>

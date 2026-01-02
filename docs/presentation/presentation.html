@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Jukebox - Presentation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .slide {
+            width: 1280px;
+            height: 720px;
+            background: white;
+            margin: 20px auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+        }
+        
+        .slide-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .hackathon-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        h2 {
+            font-size: 36px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 30px;
+        }
+        
+        h3 {
+            font-size: 28px;
+            font-weight: 500;
+            color: #718096;
+            margin-bottom: 20px;
+        }
+        
+        ul {
+            list-style: none;
+            margin-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 15px;
+            font-size: 24px;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        li:before {
+            content: "→";
+            color: #667eea;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+        
+        .card {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 30px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .feature-list li {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .tech-item {
+            background: #edf2f7;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .demo-screenshot {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+            margin-top: 20px;
+        }
+        
+        .footer {
+            position: absolute;
+            bottom: 40px;
+            left: 60px;
+            right: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            color: #718096;
+        }
+        
+        .slide-number {
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #a0e9ff 0%, #a0e9ff 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 40%;
+            background-position: 0 90%;
+        }
+        
+        .circle-logo {
+            color: #00d4aa;
+            font-weight: 700;
+        }
+        
+        .agentic-badge {
+            display: inline-block;
+            background: #00d4aa;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .contact-info {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+        }
+        
+        .icon {
+            font-size: 24px;
+        }
+        
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #666;
+            margin: 0 auto;
+        }
+        
+        @media print {
+            .slide {
+                page-break-after: always;
+                break-after: page;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Slide 1: Title -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="hackathon-badge">AGENTIC COMMERCE ON ARC HACKATHON</div>
+            <div class="slide-number">Slide 1/10</div>
+        </div>
+        
+        <h1>AI Jukebox</h1>
+        <h2>Agentic Commerce on Arc</h2>
+        <h3>Autonomous AI + USDC + Arc Blockchain</h3>
+        
+        <div class="content-grid" style="margin-top: 60px;">
+            <div class="card">
+                <h3>🚀 Live Demo</h3>
+                <p style="font-size: 22px; margin-bottom: 20px;">https://ai-jukebox-hackathon.vercel.app</p>
+                <div class="qr-code">QR Code: Live Demo</div>
+            </div>
+            
+            <div class="card">
+                <h3>👨‍💻 Developer</h3>
+                <p style="font-size: 24px; font-weight: 600; margin: 10px 0;">[Your Name]</p>
+                <p style="font-size: 20px; color: #718096;">Full-stack Developer & Designer</p>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="icon">📧</span>
+                        <span>your.email@example.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">🐙</span>
+                        <span>@yourusername</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div>Built in 48 hours for the Agentic Commerce on Arc Hackathon</div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span>⚡</span>
+                <span>Powered by Circle Products</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Slide 2: The Problem -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="hackathon-badge">PROBLEM STATEMENT</div>
+            <div class="slide-number">Slide 2/10</div>
+        </div>
+        
+        <h1>The Problem</h1>
+        
+        <div style="margin-top: 50px;">
+            <ul>
+                <li><span class="highlight">Traditional content curation is manual and slow</span></li>
+                <li>Human bias in content selection and prioritization</li>
+                <li>Centralized control over monetization decisions</li>
+                <li>Limited scalability for real-time decision making</li>
+                <li>High friction in microtransactions</li>
+            </ul>
+            
+            <div style="margin-top: 50px; display: flex; gap: 40px;">
+                <div style="flex: 1;">
+                    <h3 style="color: #e53e3e;">❌ Traditional Model</h3>
+                    <ul style="font-size: 20px;">
+                        <li>Human curators</li>
+                        <li>Days/weeks for decisions</li>
+                        <li>High transaction fees</li>
+                        <li>Centralized control</li>
+                    </ul>
+                </div>
+                
+                <div style="flex: 1;">
+                    <h3 style="color: #38a169;">✅ Our Vision</h3>
+                    <ul style="font-size: 20px;">
+                        <li>Autonomous agents</li>
+                        <li>Seconds for decisions</li>
+                        <li>Microtransactions</li>
+                        <li>Trustless operations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div>AI Jukebox - Agentic Commerce Platform</div>
+            <div>March 2024</div>
+        </div>
+    </div>
+    
+    <!-- Slide 3: Our Solution -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="hackathon-badge">OUR SOLUTION</div>
+            <div class="slide-number">Slide 3/10</div>
+        </div>
+        
+        <h1>Our Solution</h1>
+        <h2><span class="highlight">Autonomous Agentic Commerce</span> <span class="agentic-badge">NEW PARADIGM</span></h2>
+        
+        <div class="content-grid">
+            <div class="card">
+                <h3>🎵 AI Content Creation</h3>
+                <p style="font-size: 20px; margin-top: 15px;">Gemini AI generates unique electronic music with complete metadata</p>
+            </div>
+            
+            <div class="card">
+                <h3>🤖 Autonomous Agents</h3>
+                <p style="font-size: 20px; margin-top: 15px;">AI agents analyze, score, and make financial decisions</p>
+            </div>
+            
+            <div class="card">
+                <h3>💰 On-chain Commerce</h3>
+                <p style="font-size: 20px; margin-top: 15px;">USDC micropayments settled on Arc blockchain</p>
+            </div>
+            
+            <div class="card">
+                <h3>⚡ Real-time Operation</h3>
+                <p style="font-size: 20px; margin-top: 15px;">Sub-second finality enables instant user experience</p>
+            </div>
+        </div>
+        
+        <div style="margin-top: 40px; text-align: center;">
+            <h3>Core Innovation: <span class="highlight">Trustless Agentic Commerce</span></h3>
+            <p style="font-size: 22px; color: #4a5568;">AI agents autonomously making financial decisions on-chain without human intervention</p>
+        </div>
+        
+        <div class="footer">
+            <div>AI Jukebox - Agentic Commerce Platform</div>
+            <div>March 2024</div>
+        </div>
+    </div>
+    
+    <!-- Slide 4: Technology Stack -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="hackathon-badge">TECHNOLOGY STACK</div>
+            <div class="slide-number">Slide 4/10</div>
+        </div>
+        
+        <h1>Technology Stack</h1>
+        
+        <div style="margin-top: 40px;">
+            <div class="content-grid">
+                <div>
+                    <h3>Frontend</h3>
+                    <div class="tech-stack">
+                        <div class="tech-item">Next.js 14</div>
+                        <div class="tech-item">TypeScript</div>
+                        <div class="tech-item">Tailwind CSS</div>
+                        <div class="tech-item">React 18</div>
+                    </div>
+                    
+                    <h3 style="margin-top: 40px;">AI Services</h3>
+                    <div class="tech-stack">
+                        <div class="tech-item">Google Gemini API</div>
+                        <div class="tech-item">Gemini Pro</div>
+                        <div class="tech-item">Gemini Pro Vision</div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3><span class="circle-logo">Circle</span> Products</h3>
+                    <div class="tech-stack">
+                        <div class="tech-item">Arc Blockchain</div>
+                        <div class="tech-item">USDC</div>
+                        <div class="tech-item">Circle APIs</div>
+                    </div>
+                    
+                    <h3 style="margin-top: 40px;">Infrastructure</h3>
+                    <div class="tech-stack">
+                        <div class="tech-item">Vercel</div>
+                        <div class="tech-item">Serverless</div>
+                        <div class="tech-item">Edge Network</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 40px; background: #f0f9ff; padding: 25px; border-radius: 15px; border-left: 5px solid #667eea;">
+                <h3>🔧 Key Technical Decisions</h3>
+                <p style="font-size: 20px; margin-top: 10px;">
+                    • Next.js App Router for full-stack development<br>
+                    • TypeScript for end-to-end type safety<br>
+                    • Arc for USDC-native gas & sub-second finality<br>
+                    • Vercel for zero-config deployment
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div>AI Jukebox - Agentic Commerce Platform</div>
+            <div>March 2024</div>
+        </div>
+    </div>
+    
+    <!-- Slide 5: How It Works -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="hackathon-badge">WORKFLOW DEMONSTRATION</div>
+            <div class="slide-number">Slide 5/10</div>
+        </div>
+        
+        <h1>How It Works</h1>
+        
+        <div style="margin-top: 40px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px;">
+                <div style="text-align: center; flex: 1;">
+                    <div style="background: #667eea; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 24px; font-weight: bold;">1</div>
+                    <h3>Describe Song</h3>
+                    <p style="font-size: 18px; color: #718096;">User inputs prompt</p>
+                </div>
+                
+                <div style="flex: 1; text-align: center;">
+                    <div style="font-size: 36px;">→</div>
+                </div>
+                
+                <div style="text-align: center; flex: 1;">
+                    <div style="background: #764ba2; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 24px; font-weight: bold;">2</div>
+                    <h3>AI Generation</h3>
+                    <p style="font-size: 18px; color: #718096;">Gemini creates music</p>
+                </div>
+                
+                <div style="flex: 1; text-align: center;">
+                    <div style="font-size: 36px;">→</div>
+                </div>
+                
+                <div style="text-align: center; flex: 1;">
+                    <div style="background: #00d4aa; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 24px; font-weight: bold;">3</div>
+                    <h3>Agent Analysis</h3>
+                    <p style="font-size: 18px; color: #718096;">Scores 70-100</p>
+                </div>
+            </div>
+            
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 30px;">
+                <div style="text-align: center; flex: 1;">
+                    <div style="font-size: 36px;">→</div>
+                </div>
+                
+                <div style="text-align: center; flex: 1;">
+                    <div style="background: #f56565; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 24px; font-weight: bold;">4</div>
+                    <h3>Autonomous Decision</h3>
+                    <p style="font-size: 18px; color: #718096;">If score > 80</p>
+                </div>
+                
+                <div style="flex: 1; text-align: center;">
+                    <div style="font-size: 36px;">→</div>
+                </div>
+                
+                <div style="text-align: center; flex: 1;">
+                    <div style="background: #ed8936; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 24px; font-weight: bold;">5</div>
+                    <h3>USDC Payment</h3>
+                    <p style="font-size: 18px; color: #718096;">0.001 USDC</p>
+                </div>
+                
+                <div style="flex: 1; text-align: center;">
+                    <div style="font-size: 36px;">→</div>
+                </div>
+                
+                <div style="text-align: center; flex: 1;">
+                    <div style="background: #38b2ac; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 24px; font-weight: bold;">6</div>
+                    <h3>Arc Settlement</h3>
+                    <p style="font-size: 18px; color: #718096;">Sub-second finality</p>
+                </div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 40px; background: #f7fafc; padding: 20px; border-radius: 10px;">
+            <h3>⚡ Real Example</h3>
+            <p style="font-size: 20px;">
+                <strong>Prompt:</strong> "synthwave for night driving" → <strong>Score:</strong> 87/100 → <strong>Decision:</strong> Auto-prioritize → <strong>Payment:</strong> 0.001 USDC → <strong>Result:</strong> Song boosted to priority playlist
+            </p>
+        </div>
+        
+        <div class="footer">
+            <div>AI Jukebox - Agentic Commerce Platform</div>
+            <div>March 2024</div>
+        </div>
+    </div>
+    
+    <!-- Slide 6: Circle Integration -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="hackathon-badge">CIRCLE INTEGRATION</div>
+            <div class="slide-number">Slide 6/10</div>
+        </div>
+        
+        <h1>Circle Product Integration</h1>
+        
+        <div class="content-grid" style="margin-top: 40px;">
+            <div class="card">
+                <h3 style="color: #00d4aa;">🔄 Arc Blockchain</h3>
+                <p style="font-size: 20px; margin-top: 15px;"><strong>Primary Settlement Layer</strong></p>
+                <ul style="margin-top: 15px;">
+                    <li>USDC-native gas token</li>
+                    <li>Sub-second finality</li>
+                    <li>EVM compatibility</li>
+                    <li>Enterprise reliability</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h3 style="color: #2775ca;">💰 USDC</h3>
+                <p style="font-size: 20px; margin-top: 15px;"><strong>Payment Currency & Gas</strong></p>
+                <ul style="margin-top: 15px;">
+                    <li>Stable value for micropayments</li>
+                    <li>Predictable transaction costs</li>
+                    <li>Wide acceptance & liquidity</li>
+                    <li>Trusted infrastructure</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div style="margin-top: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px;">
+            <h3 style="color: white;">Why We Chose C
