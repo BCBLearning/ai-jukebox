@@ -3,9 +3,9 @@
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "NEXT_DISABLE_SWC=1 next dev",
-    "build": "NEXT_DISABLE_SWC=1 npm run generate-favicons && next build",
-    "start": "NEXT_DISABLE_SWC=1 next start",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint",
     "deploy": "vercel --prod",
     "deploy-preview": "vercel",
@@ -20,34 +20,27 @@
     "test:circle": "curl -X POST http://localhost:3000/api/paiement -H 'Content-Type: application/json' -d '{\"songTitle\":\"Test\",\"artist\":\"AI\",\"amount\":\"0.001\"}'",
     "test:config": "curl http://localhost:3000/api/config",
     
-    "generate-favicons": "node scripts/generate-favicons.js",
-    "generate-favicons:simple": "node scripts/generate-favicons-simple.js",
-    "generate-favicons:dev": "npm run generate-favicons-simple",
-    "predev": "npm run generate-favicons:dev",
-    "postinstall": "npm run generate-favicons:dev",
-    
     "clean": "rm -rf .next node_modules package-lock.json",
     "fresh-install": "npm run clean && npm install",
-    "reset": "npm run clean && npm install && npm run generate-favicons:dev"
+    "reset": "npm run clean && npm install"
   },
   "dependencies": {
-    "@circle-fin/developer-controlled-wallets": "^9.6.0",
+    "@google/generative-ai": "^0.21.0",
     "dotenv": "^17.2.3",
-    "next": "13.5.6",
+    "next": "14.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "@types/node": "18.19.3",
-    "@types/react": "18.2.45",
-    "@types/react-dom": "18.2.18",
+    "@types/node": "20.11.24",
+    "@types/react": "18.2.61",
+    "@types/react-dom": "18.2.19",
     "autoprefixer": "10.4.16",
     "eslint": "8.56.0",
-    "eslint-config-next": "13.5.6",
+    "eslint-config-next": "14.2.5",
     "postcss": "8.4.32",
-    "tailwindcss": "3.4.0",
-    "typescript": "5.3.3",
-    "canvas": "^2.11.2"
+    "tailwindcss": "3.4.1",
+    "typescript": "5.3.3"
   },
   "description": "AI Jukebox - Hackathon Submission for Agentic Commerce on Arc",
   "keywords": [
@@ -66,7 +59,7 @@
   "hackathon": {
     "name": "Agentic Commerce on Arc",
     "organization": "LabLab.ai",
-    "partners": ["Circle", "Arc", "Google DeepMind"],
+    "partners": ["Circle", "Arc", "Google Gemini"],
     "deadline": "March 9, 2024",
     "tracks": [
       "Best Autonomous Commerce Application",
