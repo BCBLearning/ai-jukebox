@@ -32,10 +32,10 @@ This project is a submission for the **"Agentic Commerce on Arc"** hackathon hos
 AI Jukebox is a next-generation agentic commerce platform where autonomous AI agents analyze and prioritize AI-generated songs using USDC micropayments settled on the Arc blockchain. The platform demonstrates the future of autonomous commerce with real AI decision-making, blockchain settlement, and seamless user experience.
 
 ![Application Screenshot](/public/images/screenshot-1.png)
-![Application Screenshot](/public/images/screenshot-2.png)
-![Application Screenshot](/public/images/screenshot-3.png)
-![Application Screenshot](/public/images/screenshot-4.png)
-![Application Screenshot](/public/images/screenshot-5.png)
+![Application Screenshot](/public/images/screenshot-2.PNG)
+![Application Screenshot](/public/images/screenshot-3.PNG)
+![Application Screenshot](/public/images/screenshot-4.PNG)
+![Application Screenshot](/public/images/screenshot-5.PNG)
 
 ## ✨ Features
 
