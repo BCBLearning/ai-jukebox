@@ -11,8 +11,8 @@
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/yourusername/ai-jukebox-hackathon.git
-cd ai-jukebox-hackathon
+git clone https://github.com/BCBLearning/ai-jukebox.git
+cd ai-jukebox
 ```
 
 2. Install Dependencies
