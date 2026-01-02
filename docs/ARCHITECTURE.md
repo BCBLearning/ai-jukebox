@@ -1,4 +1,4 @@
-```markdown
+
 # Technical Architecture
 
 ## System Overview
