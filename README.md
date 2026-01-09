@@ -6,7 +6,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 🚀 Live Demo
-**[https://ai-jukebox-hackathon.vercel.app](https://ai-jukebox-hackathon.vercel.app)**
+**[https://ai-jukebox-three.vercel.app](https://ai-jukebox-three.vercel.app)**
+
 
 ## 🎯 Hackathon Submission
 This project is a submission for the **"Agentic Commerce on Arc"** hackathon hosted by LabLab.ai.
