@@ -1,0 +1,49 @@
+STORYBOARD OFFICIEL — AI Jukebox (4 min 30 s)
+🎬 0:00 – 0:20 | Hook – Problème
+Visuel
+screenshot-1.png
+Titre overlay : “Creators struggle to monetize efficiently”
+Voix on
+“Today, digital creators face fragmented tools, lack of transparency, and limited monetization options.”
+🎬 0:20 – 0:50 | Vision & Solution
+Visuel
+screenshot-2.png
+Overlay keywords : AI Agents · Blockchain · Web3 · Digital Commerce
+Voix on
+“AI Jukebox is a Web3-powered platform combining AI agents, blockchain, and digital commerce to automate creation, distribution, and monetization.”
+🎬 0:50 – 1:30 | Architecture & Innovation
+Visuel
+screenshot-3.png
+Zoom léger sur les blocs clés
+Voix on
+“At the core of AI Jukebox are autonomous AI agents orchestrating creative and commercial workflows, while blockchain ensures transparency, ownership, and traceability.”
+🎬 1:30 – 2:40 | LIVE DEMO (partie la plus importante)
+Visuel
+Capture écran en direct :
+Copier le code
+
+https://ai-jukebox-three.vercel.app/
+Navigation simple (landing → interaction clé)
+Voix on
+“Let me show you the platform. Users interact with AI-powered agents that automate workflows, manage digital assets, and enable direct monetization.”
+⚠️ Pas besoin de tout montrer. Clarté > exhaustivité.
+🎬 2:40 – 3:20 | Cas d’usage
+Visuel
+screenshot-4.png
+screenshot-5.png (enchaînement)
+Voix on
+“AI Jukebox empowers musicians, creators, and platforms to retain ownership, reduce intermediaries, and unlock new revenue models.”
+🎬 3:20 – 4:00 | Valeur & Différenciation
+Visuel
+screenshot-6.png
+Overlay : Automation · Transparency · Scalability
+Voix on
+“By combining automation, on-chain trust, and digital commerce, AI Jukebox scales creative economies globally.”
+🎬 4:00 – 4:30 | Conclusion & Call to Action
+Visuel
+Retour screenshot-1.png ou landing live
+Texte :
+AI Jukebox
+https://ai-jukebox-three.vercel.app
+Voix on
+“AI Jukebox is redefining how creativity is produced and monetized in the Web3 era. Thank you.”
